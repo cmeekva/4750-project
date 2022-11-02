@@ -56,3 +56,5 @@ function login($username, $password){
             
     }
 }
+
+?>
