@@ -1,8 +1,15 @@
 <?php
-require("connect-db.php");   
+require("connect-db.php");
+require("dillons-db.php");  
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <?php
+if (isset($_COOKIE['user']))
+{ 
+$blog_list = get_blogs();
+?>  
 <html>
     <head>
         <title>"Blog Site"</title>
@@ -11,23 +18,30 @@ require("connect-db.php");
         <div class="container-fluid">
           <a class="navbar-brand">Fortnite Blog Website</a>
           </div>
-          
-    </nav>
-    <?php
-if (isset($_COOKIE['user']))
-{ 
-?>  
-  <div class="container">
-    <div style="float:right; padding:30px;">    
+          <div style="float:right">    
       <form action="logout.php" method="get">
         <input type="submit" value="Log out" class="btn btn-dark" />
       </form>
-    </div>    
-    
-    
+    </div>
+          
+    </nav>
+  <div class="container">
+        
     <h1>Welcome <font color="green" style="font-style:italic"><?php echo $_COOKIE['user'] ?></font> </h1>
-
-
+    <table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
+    <thead>
+    <tr style="background-color:#B0B0B0">
+        <th width="30%">Blog Title</th>        
+        <th width="30%">Blog Description</th>       
+    </tr>
+    </thead>
+    <?php foreach ($blog_list as $var): ?>
+     <tr>
+     <td><?php echo $var['blogTitle']; ?></td>
+     <td><?php echo $var['blogDescription']; ?></td>                                     
+    </tr>
+    <?php endforeach; ?>
+    </table>
   </div>
 <?php 
 }

@@ -37,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0)
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       Username: <input type="text" name="username" class="form-control" autofocus required /> <br/>
       Password: <input type="password" name="pwd" class="form-control" required /> <br/>
-      <input type="submit" value="Sign in" class="btn btn-light"  />   
-      <a href="signup.php">sign up</a>
+      <input type="submit" value="Log In" class="btn btn-light"  />   
+      <a href="signup.php" class="btn btn-light">Sign up</a>
     </form>
   </div>
 

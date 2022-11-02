@@ -57,4 +57,22 @@ function login($username, $password){
     }
 }
 
+function get_blogs(){
+    global $db;
+    $query = "SELECT * FROM Blogs";
+    try{
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to add user to database <br/>";
+            
+    }
+}
+
 ?>

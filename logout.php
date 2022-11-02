@@ -32,7 +32,7 @@ if (count($_COOKIE) > 0)
    //    header('Location: login.php');
 	
    // redirect with 5 seconds delay
-   header('refresh:2; url=login.php');
+   header('refresh:1; url=login.php');
 }
 ?>
 

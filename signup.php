@@ -73,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <input type="text" class="form-control" name="email" required />            
   </div>   
   <div class="row mb-3 mx-3">    
-    <input type="submit" value="signup" name="btnAction" class="btn btn-dark" /> 
-    <a href="login.php">Login</a>           
+    <input type="submit" value="Sign Up" name="btnAction" class="btn btn-dark" /> 
+    <a href="login.php" class="btn btn-light">Log In</a>         
   </div> 
 
 </form> 
