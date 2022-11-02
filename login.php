@@ -43,13 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0)
   </div>
 
 <?php
-// if ($_SERVER['REQUEST_METHOD'] == "POST")
-// {	   
-//    if (strlen($_POST['username']) > 0)
-//    {
-//       header('Location: survey-instruction.php');
-//    }
-// }
+
 ?>
 
 

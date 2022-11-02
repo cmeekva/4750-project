@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">  
   
-  <title>PHP State Maintenance (Cookies)</title>    
+  <title>Fortnite Blog Logout</title>    
 </head>
 <body>
   
@@ -28,18 +28,9 @@ if (count($_COOKIE) > 0)
       setcookie($key, '', time() - 3600);
    }
 	
-   // redirect to the login page immediately
-   //    header('Location: login.php');
-	
-   // redirect with 5 seconds delay
    header('refresh:1; url=login.php');
 }
 ?>
-
-
-
-
-
 
 </body>
 </html>
