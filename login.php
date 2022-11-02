@@ -8,11 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0)
    {
       $pwd = trim($_POST['pwd']);
       if (login($username, $pwd)){
-        echo "you got it";
         setcookie('user', $username, time()+3600);
         header('Location: home.php');
       }else{
-        echo "incorrect password";
+        echo "Incorrect Username or Password";
       }
     }else{
         echo "you did not enter a password";
@@ -34,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0)
 <body>
   
   <div class="container">
-    <h1>Welcome to CS4640 Survey</h1>
+    <h1>Login to the Fortnite Blog</h1>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-      Name: <input type="text" name="username" class="form-control" autofocus required /> <br/>
+      Username: <input type="text" name="username" class="form-control" autofocus required /> <br/>
       Password: <input type="text" name="pwd" class="form-control" required /> <br/>
       <input type="submit" value="Sign in" class="btn btn-light"  />   
       <a href="signup.php">sign up</a>
