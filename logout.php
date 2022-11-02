@@ -10,7 +10,7 @@
 <body>
   
   <div class="container">
-    <h1>CS4640 Survey</h1>
+    <h1>Fortnite Blog</h1>
     Successfully logged out 
   </div>
 
@@ -32,7 +32,7 @@ if (count($_COOKIE) > 0)
    //    header('Location: login.php');
 	
    // redirect with 5 seconds delay
-   header('refresh:5; url=login.php');
+   header('refresh:2; url=login.php');
 }
 ?>
 
