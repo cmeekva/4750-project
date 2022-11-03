@@ -2,10 +2,12 @@
 require("connect-db.php"); 
 require("dillons-db.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "signup"){
+  if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "Sign Up"){
     if(enter_user($_POST['username'],$_POST['password'],$_POST['email'])){
         setcookie('user', $_POST['username'], time()+3600);
         header('Location: home.php'); 
+    }else{
+        echo "Was unable to sign up";
     }
     
   }

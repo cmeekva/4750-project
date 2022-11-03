@@ -36,8 +36,9 @@ $blog_list = get_blogs();
     </tr>
     </thead>
     <?php foreach ($blog_list as $var): ?>
+       
      <tr>
-     <td><?php echo $var['blogTitle']; ?></td>
+     <td><a href="blog.php?blogID=<?php echo $var['BlogID'] ?>"><?php echo $var['blogTitle']; ?><a></td>
      <td><?php echo $var['blogDescription']; ?></td>                                     
     </tr>
     <?php endforeach; ?>
