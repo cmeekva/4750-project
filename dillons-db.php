@@ -75,4 +75,23 @@ function get_blogs(){
     }
 }
 
+function get_posts($BlogID){
+    global $db;
+    $query = "SELECT PostID, PostTitle, PostTextContent, PostTimePosted, PostViews FROM `Posts` WHERE BlogID = :bid";
+    try{
+        $statement = $db->prepare($query);
+        $statement->bindValue(":bid", $BlogID);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to add user to database <br/>";
+            
+    }
+}
+
 ?>
