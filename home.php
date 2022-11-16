@@ -16,7 +16,7 @@ $blog_list = get_blogs();
     </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand">Fortnite Blog Website</a>
+          <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
           </div>
           <div style="float:right">    
       <form action="logout.php" method="get">

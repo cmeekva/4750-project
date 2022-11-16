@@ -94,4 +94,22 @@ function get_posts($BlogID){
     }
 }
 
+function like($PostId){
+    global $db;
+    $query = "UPDATE `Posts` SET `PostViews` = `PostViews` + 1 WHERE `Posts`.`PostID` = :postId";
+    try{
+        $statement = $db->prepare($query);
+        $statement->bindValue(":postId", $PostId);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to add user to database <br/>";
+            
+    }
+}
+
 ?>
