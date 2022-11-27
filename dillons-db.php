@@ -58,13 +58,16 @@ function create_blog($blogTitle, $blogDescription){
     }
 }
 
-function create_blog_post($postTitle, $PostTextContent){
+function create_blog_post($PostTitle, $PostTextContent){
     global $db;
-    $query = "INSERT INTO Posts (postTitle,PostTextContent) VALUES (:postTitle, :PostTextContent)";
+    $query = "INSERT INTO Posts (PostTitle,PostTextContent,PostViews,PostTimePosted,BlogID) VALUES (:PostTitle, :PostTextContent, :PostViews, :PostTimePosted, :BlogID)";
     try{
     $statement = $db->prepare($query);
-    $statement->bindValue(":postTitle",$postTitle);
+    $statement->bindValue(":PostTitle",$PostTitle);
     $statement->bindValue(":PostTextcontent",$PostTextContent);
+    $statement->bindValue(":PostViews", 0);
+    $statement->bindValue(":PostTimePosted", 2022-11-27);
+    $statement->bindValue(":BlogID", 5); // Going to need to change to get the current user's blog ID
     $statement->execute();
     $statement->closeCursor();
     return true;

@@ -22,7 +22,7 @@ $blog_list = get_blogs();
           <a href="create-blog.php" class="btn">+ Create a new blog</a>
         </div>
         <div class="float:center">
-          <a href="create-blog-post.php" class="btn">+ Create a new post</a>
+          <a href="create-blog-post.php" class="btn">+ Create a new post!</a>
         </div>
         <div style="float:right">    
       <form action="logout.php" method="get">

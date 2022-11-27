@@ -2,11 +2,11 @@
 require("connect-db.php");
 require("dillons-db.php");  
 
-if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['postTitle']) > 0 && strlen($_POST['PostTextContent']) > 0)
+if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['PostTitle']) > 0 && strlen($_POST['PostTextContent']) > 0)
 {
-    $postTitle = trim($_POST['postTitle']);
+    $PostTitle = trim($_POST['PostTitle']);
     $PostTextContent = trim($_POST['PostTextContent']);
-    create_blog_post($blogTitle, $blogDescription);
+    create_blog_post($PostTitle, $PostTextContent);
     header('Location: home.php');
 }
 
@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['postTitle']) > 0 && s
   <div class="container">
     <h1>Create A New Post</h1>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
-      Title: <input type="text" name="postTitle" class="form-control" autofocus required /> <br/>
-      Description: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
+      Title: <input type="text" name="PostTitle" class="form-control" autofocus required /> <br/>
+      Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
       <input type="submit" value="Create!" class="btn btn-light"  />   
     </form>
   </div>
