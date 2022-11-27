@@ -58,6 +58,26 @@ function create_blog($blogTitle, $blogDescription){
     }
 }
 
+function create_blog_post($postTitle, $PostTextContent){
+    global $db;
+    $query = "INSERT INTO Posts (postTitle,PostTextContent) VALUES (:postTitle, :PostTextContent)";
+    try{
+    $statement = $db->prepare($query);
+    $statement->bindValue(":postTitle",$postTitle);
+    $statement->bindValue(":PostTextcontent",$PostTextContent);
+    $statement->execute();
+    $statement->closeCursor();
+    return true;
+
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to add post to database <br/>";
+        
+    }
+}
+
 function login($username, $password){
     global $db;
     $query = "SELECT hashedPassword FROM Users WHERE Username = :username";

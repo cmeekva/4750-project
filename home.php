@@ -1,5 +1,5 @@
 <?php
-require("connect-db.php");
+require("connect-db.php");   
 require("dillons-db.php");  
 ?>
 
@@ -17,19 +17,22 @@ $blog_list = get_blogs();
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
-        </div>
+          </div>
         <div class="float:center">
           <a href="create-blog.php" class="btn">+ Create a new blog</a>
+        </div>
+        <div class="float:center">
+          <a href="create-blog-post.php" class="btn">+ Create a new post</a>
         </div>
         <div style="float:right">    
       <form action="logout.php" method="get">
         <input type="submit" value="Log out" class="btn btn-dark" />
       </form>
-    </div>
-          
+    </div>    
+    
     </nav>
   <div class="container">
-        
+    
     <h1>Welcome <font color="green" style="font-style:italic"><?php echo $_COOKIE['user'] ?></font> </h1>
     <table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
     <thead>
@@ -39,7 +42,7 @@ $blog_list = get_blogs();
     </tr>
     </thead>
     <?php foreach ($blog_list as $var): ?>
-       
+
      <tr>
      <td><a href="blog.php?BlogID=<?php echo $var['BlogID'] ?>&BlogTitle=<?php echo $var['blogTitle'] ?>"><?php echo $var['blogTitle']; ?><a></td>
      <td><?php echo $var['blogDescription']; ?></td>                                     
