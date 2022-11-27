@@ -17,8 +17,11 @@ $blog_list = get_blogs();
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
-          </div>
-          <div style="float:right">    
+        </div>
+        <div class="float:center">
+          <a href="create-blog.php" class="btn">+ Create a new blog</a>
+        </div>
+        <div style="float:right">    
       <form action="logout.php" method="get">
         <input type="submit" value="Log out" class="btn btn-dark" />
       </form>
