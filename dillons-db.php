@@ -38,6 +38,26 @@ function enter_user($username, $password, $email){
     }
 }
 
+function create_blog($blogTitle, $blogDescription){
+    global $db;
+    $query = "INSERT INTO Blogs (blogTitle,blogDescription) VALUES (:blogTitle, :blogDescription)";
+    try{
+    $statement = $db->prepare($query);
+    $statement->bindValue(":blogTitle",$blogTitle);
+    $statement->bindValue(":blogDescription",$blogDescription);
+    $statement->execute();
+    $statement->closeCursor();
+    return true;
+
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to add blog to database <br/>";
+        
+    }
+}
+
 function login($username, $password){
     global $db;
     $query = "SELECT hashedPassword FROM Users WHERE Username = :username";
