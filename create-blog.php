@@ -2,11 +2,14 @@
 require("connect-db.php");
 require("dillons-db.php");  
 
+if (isset($_COOKIE['user']))
+{
+
 if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['blogTitle']) > 0 && strlen($_POST['blogDescription']) > 0)
 {
     $blogTitle = trim($_POST['blogTitle']);
     $blogDescription = trim($_POST['blogDescription']);
-    create_blog($blogTitle, $blogDescription);
+    create_blog($blogTitle, $blogDescription, $_COOKIE['user']);
     header('Location: home.php');
 }
 
@@ -34,11 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['blogTitle']) > 0 && s
   </div>
 
 <?php
-
+}
+else 
+   header('Location: login.php');   // force login
 ?>
 
+<footer class="text-center text-lg-start bg-light text-muted">
+
+<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+  © 2022 Copyright:
+  <a class="text-reset fw-bold" href="https://www.linkedin.com/in/colin-meek">Colin Meek (cmm6zyd)</a>
+</div>
+</footer>
 
 </body>
 </html>
-
-

@@ -38,15 +38,43 @@ function enter_user($username, $password, $email){
     }
 }
 
-function create_blog($blogTitle, $blogDescription){
+function create_blog($blogTitle, $blogDescription, $username){
     global $db;
     $query = "INSERT INTO Blogs (blogTitle,blogDescription) VALUES (:blogTitle, :blogDescription)";
+    $query2 = "SELECT BlogID FROM Blogs WHERE blogTitle=:blogTitle AND blogDescription=:blogDescription";
+    $query3 = "SELECT userID FROM Users WHERE Username=:username";
+    $query4 = "INSERT INTO `makesBlog` (`UserID`, `BlogID`) VALUES ('25', :BlogID)";
     try{
     $statement = $db->prepare($query);
     $statement->bindValue(":blogTitle",$blogTitle);
     $statement->bindValue(":blogDescription",$blogDescription);
     $statement->execute();
     $statement->closeCursor();
+
+    ## Getting the BlogID of the blog we just created
+    $statement2 = $db->prepare($query2);
+    $statement2->bindValue(":BlogID", $BlogID);
+    $statement2->execute();
+    $result2 = $statement2->fetch();
+    $BlogID = $result2[0];
+    $statement2->closeCursor();
+
+    ## getting the ID of the user
+    $statement3 = $db->prepare($query3);
+    $statement3->bindValue(":username", $username);
+    $statement3->execute();
+    $result3 = $statement3->fetch();
+    $userID = $result3[0];
+    $statement3->closeCursor();
+
+
+    ## Inserting that ID and the BlogID into makesBlog
+    $statement4 = $db->prepare($query4);
+    $statement4->bindValue(":BlogID",$BlogID);
+    $statement4->bindValue(":UserID",$UserID);
+    $statement4->execute();
+    $statement4->closeCursor();
+    
     return true;
 
     }
@@ -58,7 +86,7 @@ function create_blog($blogTitle, $blogDescription){
     }
 }
 
-function create_blog_post($PostTitle, $PostTextContent){
+function create_blog_post($PostTitle, $PostTextContent, $username){
     global $db;
     $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES ('6', :title , 0, :content , NULL);";
     try{
