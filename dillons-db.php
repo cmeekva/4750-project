@@ -58,21 +58,23 @@ function create_blog($blogTitle, $blogDescription, $username){
     $statement2->execute();
     $result2 = $statement2->fetch();
     $BlogID = $result2[0];
+    // return $BlogID;
     $statement2->closeCursor();
 
     ## getting the ID of the user
     $statement3 = $db->prepare($query3);
-    $statement3->bindValue(":username", "cmeek2");
+    $statement3->bindValue(":username", $username);
     $statement3->execute();
     $result3 = $statement3->fetch();
     $userID = $result3[0];
+    // return $userID;
     $statement3->closeCursor();
 
 
     ## Inserting that ID and the BlogID into makesBlog
     $statement4 = $db->prepare($query4);
     $statement4->bindValue(":BlogID",$BlogID);
-    $statement4->bindValue(":UserID",$UserID);
+    $statement4->bindValue(":UserID",$userID);
     $statement4->execute();
     $statement4->closeCursor();
     
