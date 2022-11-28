@@ -43,7 +43,7 @@ function create_blog($blogTitle, $blogDescription, $username){
     $query = "INSERT INTO Blogs (blogTitle,blogDescription) VALUES (:blogTitle, :blogDescription)";
     $query2 = "SELECT BlogID FROM Blogs WHERE blogTitle=:blogTitle AND blogDescription=:blogDescription";
     $query3 = "SELECT userID FROM Users WHERE Username=:username";
-    $query4 = "INSERT INTO `makesBlog` (`UserID`, `BlogID`) VALUES ('25', :BlogID)";
+    $query4 = "INSERT INTO makesBlog (UserID, BlogID) VALUES (:UserID, :BlogID)";
     try{
     $statement = $db->prepare($query);
     $statement->bindValue(":blogTitle",$blogTitle);
@@ -53,7 +53,8 @@ function create_blog($blogTitle, $blogDescription, $username){
 
     ## Getting the BlogID of the blog we just created
     $statement2 = $db->prepare($query2);
-    $statement2->bindValue(":BlogID", $BlogID);
+    $statement2->bindValue(":blogTitle",$blogTitle);
+    $statement2->bindValue(":blogDescription",$blogDescription);
     $statement2->execute();
     $result2 = $statement2->fetch();
     $BlogID = $result2[0];
@@ -61,7 +62,7 @@ function create_blog($blogTitle, $blogDescription, $username){
 
     ## getting the ID of the user
     $statement3 = $db->prepare($query3);
-    $statement3->bindValue(":username", $username);
+    $statement3->bindValue(":username", "cmeek2");
     $statement3->execute();
     $result3 = $statement3->fetch();
     $userID = $result3[0];
