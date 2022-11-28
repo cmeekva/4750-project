@@ -60,23 +60,20 @@ function create_blog($blogTitle, $blogDescription){
 
 function create_blog_post($PostTitle, $PostTextContent){
     global $db;
-    $query = "INSERT INTO Posts (PostTitle,PostTextContent,PostViews,PostTimePosted,BlogID) VALUES (:PostTitle, :PostTextContent, :PostViews, :PostTimePosted, :BlogID)";
+    $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES ('6', :title , 0, :content , NULL);";
     try{
     $statement = $db->prepare($query);
-    $statement->bindValue(":PostTitle",$PostTitle);
-    $statement->bindValue(":PostTextcontent",$PostTextContent);
-    $statement->bindValue(":PostViews", 0);
-    $statement->bindValue(":PostTimePosted", 2022-11-27);
-    $statement->bindValue(":BlogID", 5); // Going to need to change to get the current user's blog ID
+    $statement->bindValue(":title",$PostTitle);
+    $statement->bindValue(":content",$PostTextContent);
     $statement->execute();
     $statement->closeCursor();
     return true;
 
     }
     catch(PDOException $e){
-        echo $e->getMessage();
+        return $e->getMessage();
         if($statement->rowCount() == 0)
-            echo "Failed to add post to database <br/>";
+            return "Failed to add post to database <br/>";
         
     }
 }
