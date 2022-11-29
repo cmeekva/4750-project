@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['blogTitle']) > 0 && s
     $blogTitle = trim($_POST['blogTitle']);
     $blogDescription = trim($_POST['blogDescription']);
     create_blog($blogTitle, $blogDescription, $_COOKIE['user']);
-    header('Location: user-blogs.php');
+    header('Location: user-blogs-list.php');
 }
 
 ?>

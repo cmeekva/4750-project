@@ -204,4 +204,23 @@ function like($PostId){
     }
 }
 
+function delete_post($PostId){
+    global $db;
+    $query = "DELETE FROM Posts WHERE `Posts`.`PostID` = :postId";
+    try{
+        $statement = $db->prepare($query);
+        $statement->bindValue(":postId", $PostId);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to delete post from db<br/>";
+            
+    }
+}
+
+
 ?>

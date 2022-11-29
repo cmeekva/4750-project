@@ -42,7 +42,7 @@ $blog_list = get_blogs_by_user($user);
     <?php foreach ($blog_list as $var): ?>
 
      <tr>
-     <td><a href="blog.php?BlogID=<?php echo $var['BlogID'] ?>&BlogTitle=<?php echo $var['blogTitle'] ?>"><?php echo $var['blogTitle']; ?><a></td>
+     <td><a href="user-blog.php?BlogID=<?php echo $var['BlogID'] ?>&BlogTitle=<?php echo $var['blogTitle'] ?>"><?php echo $var['blogTitle']; ?><a></td>
      <td><?php echo $var['blogDescription']; ?></td>                                     
     </tr>
     <?php endforeach; ?>

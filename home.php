@@ -18,11 +18,9 @@ $blog_list = get_blogs();
         <div class="container-fluid">
           <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
           </div>
+
         <div class="float:center">
-          <a href="create-blog.php" class="btn">+ Create a new blog!</a>
-        </div>
-        <div class="float:center">
-          <a href="user-blogs.php" class="btn">Your blogs!</a>
+          <a href="user-blogs-list.php" class="btn">Your blogs!</a>
         </div>
         <div style="float:right">    
       <form action="logout.php" method="get">

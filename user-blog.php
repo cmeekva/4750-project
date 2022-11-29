@@ -9,18 +9,18 @@ require("dillons-db.php");
 if (isset($_COOKIE['user']))
 { 
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(!empty($_POST['Like'])){
-      like($_POST['postId']);
+    if(!empty($_POST['Delete'])){
+      delete_post($_POST['postId']);
     }
   }
 
-//   if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['PostTitle']) > 0 && strlen($_POST['PostTextContent']) > 0)
-// {
-//     $PostTitle = trim($_POST['PostTitle']);
-//     $PostTextContent = trim($_POST['PostTextContent']);
-//     create_blog_post($PostTitle, $PostTextContent, $_COOKIE['user'], $_GET['BlogID']);
-//     header('Location: home.php');
-// }
+  if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST['PostTitle']) && !empty($_POST['PostTextContent']))
+{
+    $PostTitle = trim($_POST['PostTitle']);
+    $PostTextContent = trim($_POST['PostTextContent']);
+    create_blog_post($PostTitle, $PostTextContent, $_COOKIE['user'], $_GET['BlogID']);
+    // header('Location: home.php');
+}
 
 $post_list = get_posts($_GET['BlogID']);
 
@@ -40,6 +40,15 @@ $post_list = get_posts($_GET['BlogID']);
     </div>
     </nav>
 
+
+    <div class="container">
+    <h1>Create A New Post</h1>
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      Title: <input type="text" name="PostTitle" class="form-control" autofocus required /> <br/>
+      Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
+      <input type="submit" value="Create!" class="btn btn-light"  />   
+    </form>
+  </div>
   
   <div class="container">
   <h1>Posts for <?php echo $_GET['BlogTitle'] ?></h1>
@@ -50,7 +59,7 @@ $post_list = get_posts($_GET['BlogID']);
         <th width="30%">Caption</th>
         <th width="30%">Time Posted</th>
         <th width="30%">Likes</th> 
-        <th width="30%">Like</th>   
+        <th width="30%">Delete</th>   
 
     </tr>
     </thead>
@@ -61,8 +70,8 @@ $post_list = get_posts($_GET['BlogID']);
      <td><?php echo $var['PostTextContent']; ?></td> 
      <td><?php echo $var['PostTimePosted']; ?></td>
      <td><?php echo $var['PostViews']; ?></td> 
-     <td><form action="blog.php?BlogID=<?php echo $_GET['BlogID'] ?>&BlogTitle=<?php echo $_GET['BlogTitle'] ?>" method="post">
-        <input type="submit" name="Like" value="Like" class="btn btn-dark" />
+     <td><form action="user-blog.php?BlogID=<?php echo $_GET['BlogID'] ?>&BlogTitle=<?php echo $_GET['BlogTitle'] ?>" method="post">
+        <input type="submit" name="Delete" value="Delete" class="btn btn-dark" />
         <input type="hidden" name="postId" value="<?php echo $var['PostID']?>" />
       </form></td>                                     
     </tr>
