@@ -293,9 +293,9 @@ function make_comment($username, $comment){
         $userID = $result[0];
 
         ##insert into comments
-        $statement2 = $db->prepare($query);
+        $statement2 = $db->prepare($query2);
         $statement2->bindValue(":id", $userID);
-        $statement2->bindValue(":postId", $comment);
+        $statement2->bindValue(":comment", $comment);
         $statement2->execute();
         $statement2->closeCursor();
 

@@ -52,7 +52,7 @@ $post = get_single_post($_GET['PostId']);
   <br>
   Likes: <?php echo $post[4] ?>
   <br>
-  <form name="mainForm" action="post.php" method="post"> 
+  <form name="mainForm" action="post.php?PostId=<?php echo $post[0] ?>" method="post"> 
   <input type = "text" name="comment" placeholder="Type your comment here!" class="col-sm-11">
     <input type="submit" value="Post" name="btnAction" class="btn btn-dark" />
 </form> 
