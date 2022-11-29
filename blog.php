@@ -14,6 +14,14 @@ if (isset($_COOKIE['user']))
     }
   }
 
+  if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['PostTitle']) > 0 && strlen($_POST['PostTextContent']) > 0)
+{
+    $PostTitle = trim($_POST['PostTitle']);
+    $PostTextContent = trim($_POST['PostTextContent']);
+    create_blog_post($PostTitle, $PostTextContent, $_COOKIE['user'], $_GET['BlogID']);
+    header('Location: home.php');
+}
+
 $post_list = get_posts($_GET['BlogID']);
 
 ?>  
@@ -30,8 +38,18 @@ $post_list = get_posts($_GET['BlogID']);
         <input type="submit" value="Log out" class="btn btn-dark" />
       </form>
     </div>
-          
     </nav>
+
+
+    <div class="container">
+    <h1>Create A New Post</h1>
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      Title: <input type="text" name="PostTitle" class="form-control" autofocus required /> <br/>
+      Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
+      <input type="submit" value="Create!" class="btn btn-light"  />   
+    </form>
+  </div>
+  
   <div class="container">
   <h1>Posts for <?php echo $_GET['BlogTitle'] ?></h1>
     <table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
