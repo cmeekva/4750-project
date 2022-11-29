@@ -1,9 +1,10 @@
 <?php
-function enter_user($username, $password, $email){
+function enter_user($username, $password, $email, $fname, $lname){
     global $db;
     $query = "INSERT INTO Users (Username,hashedPassword) VALUES (:username, :pword)";//THis replaced user input with templates. It compiles code first then fills in the strings
     $query2 = "SELECT userID FROM Users WHERE Username=:username";
     $query3 = "INSERT INTO email (userID, email) VALUES (:id, :email)";
+    $query4 = "INSERT INTO Names (userID, Fname, Lname) VALUES (:id, :fname, :lname)";
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     try{
     ## inserting username and password into the Users table
@@ -28,6 +29,14 @@ function enter_user($username, $password, $email){
     $statement3->bindValue(":id",$userID);
     $statement3->execute();
     $statement3->closeCursor();
+
+    ## Inserting names into the names table
+    $statement4 = $db->prepare($query4);
+    $statement4->bindValue(":id",$userID);
+    $statement4->bindValue(":fname",$fname);
+    $statement4->bindValue(":lname",$lname);
+    $statement4->execute();
+    $statement4->closeCursor();
     return true;
     }
     catch(PDOException $e){

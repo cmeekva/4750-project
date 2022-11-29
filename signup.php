@@ -3,7 +3,7 @@ require("connect-db.php");
 require("dillons-db.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "Sign Up"){
-    if(enter_user($_POST['username'],$_POST['password'],$_POST['email'])){
+    if(enter_user($_POST['username'],$_POST['password'],$_POST['email'],$_POST['fname'],$_POST['lname'])){
         setcookie('user', $_POST['username'], time()+3600);
         header('Location: home.php'); 
     }else{
@@ -57,6 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <div class="row mb-3 mx-3">
     Email:
     <input type="text" class="form-control" name="email" required />            
+  </div>  
+  <div class="row mb-3 mx-3">
+    First Name:
+    <input type="text" class="form-control" name="fname" required />            
+  </div>  
+  <div class="row mb-3 mx-3">
+    Last Name:
+    <input type="text" class="form-control" name="lname" required />            
   </div>   
   <div class="row mb-3 mx-3">    
     <input type="submit" value="Sign Up" name="btnAction" class="btn btn-dark" /> 
