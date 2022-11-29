@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['PostTitle']) > 0 && s
 {
     $PostTitle = trim($_POST['PostTitle']);
     $PostTextContent = trim($_POST['PostTextContent']);
-    create_blog_post($PostTitle, $PostTextContent, $_COOKIE['user']);
+    create_blog_post($PostTitle, $PostTextContent, $_COOKIE['user'], $_GET['BlogID']);
     header('Location: home.php');
 }
 

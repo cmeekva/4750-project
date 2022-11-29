@@ -89,13 +89,14 @@ function create_blog($blogTitle, $blogDescription, $username){
     }
 }
 
-function create_blog_post($PostTitle, $PostTextContent, $username){
+function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID){
     global $db;
-    $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES ('6', :title , 0, :content , NULL);";
+    $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES (:blogid, :title , 0, :content , NULL);";
     try{
     $statement = $db->prepare($query);
     $statement->bindValue(":title",$PostTitle);
     $statement->bindValue(":content",$PostTextContent);
+    $statement->bindValue(":blogid",$BlogID);
     $statement->execute();
     $statement->closeCursor();
     return true;
@@ -108,6 +109,7 @@ function create_blog_post($PostTitle, $PostTextContent, $username){
         
     }
 }
+
 
 function login($username, $password){
     global $db;
@@ -144,6 +146,25 @@ function get_blogs(){
             echo "Failed to add user to database <br/>";
             
     }
+}
+
+function get_blogs_by_user($username){
+    global $db;
+    $query = "SELECT * FROM Blogs NATURAL JOIN makesBlog NATURAL JOIN Users WHERE Users.Username = :username";
+    try{
+        $statement = $db->prepare($query);
+        $statement->bindValue(":username", $username);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to user specific blogs! <br/>";
+    }
+              
 }
 
 function get_posts($BlogID){
