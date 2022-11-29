@@ -13,6 +13,11 @@ if (isset($_COOKIE['user']))
       like($_POST['postId']);
     }
   }
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "Post"){
+        echo make_comment($_COOKIE['user'],$_POST['comment']);
+    }
+}
 
 //   if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['PostTitle']) > 0 && strlen($_POST['PostTextContent']) > 0)
 // {
@@ -22,7 +27,7 @@ if (isset($_COOKIE['user']))
 //     header('Location: home.php');
 // }
 
-$post_list = get_posts($_GET['BlogID']);
+$post = get_single_post($_GET['PostId']);
 
 ?>  
 <html>
@@ -42,33 +47,15 @@ $post_list = get_posts($_GET['BlogID']);
 
   
   <div class="container">
-  <h1>Posts for <?php echo $_GET['BlogTitle'] ?></h1>
-    <table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
-    <thead>
-    <tr style="background-color:#B0B0B0">
-        <th width="30%">Post Title</th>        
-        <th width="30%">Caption</th>
-        <th width="30%">Time Posted</th>
-        <th width="30%">Likes</th> 
-        <th width="30%">Like</th>   
-
-    </tr>
-    </thead>
-    <?php foreach ($post_list as $var): ?>
-       
-     <tr>
-     
-     <td><a href="post.php?PostId=<?php echo $var['PostID']?>"><?php echo $var['PostTitle']; ?></a></td>
-     <td><?php echo $var['PostTextContent']; ?></td> 
-     <td><?php echo $var['PostTimePosted']; ?></td>
-     <td><?php echo $var['PostViews']; ?></td> 
-     <td><form action="blog.php?BlogID=<?php echo $_GET['BlogID'] ?>&BlogTitle=<?php echo $_GET['BlogTitle'] ?>" method="post">
-        <input type="submit" name="Like" value="Like" class="btn btn-dark" />
-        <input type="hidden" name="postId" value="<?php echo $var['PostID']?>" />
-      </form></td>                                     
-    </tr>
-    <?php endforeach; ?>
-    </table>
+  <h1><?php echo $post[2] ?></h1>
+  <?php echo $post[5] ?>
+  <br>
+  Likes: <?php echo $post[4] ?>
+  <br>
+  <form name="mainForm" action="post.php" method="post"> 
+  <input type = "text" name="comment" placeholder="Type your comment here!" class="col-sm-11">
+    <input type="submit" value="Post" name="btnAction" class="btn btn-dark" />
+</form> 
   </div>
 <?php 
 }

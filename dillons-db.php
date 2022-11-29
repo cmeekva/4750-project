@@ -225,6 +225,25 @@ function get_posts($BlogID){
     }
 }
 
+function get_single_post($PostID){
+    global $db;
+    $query = "SELECT * FROM `Posts` WHERE PostID = :pid";
+    try{
+        $statement = $db->prepare($query);
+        $statement->bindValue(":pid", $PostID);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to add user to database <br/>";
+            
+    }
+
+}
 function like($PostId){
     global $db;
     $query = "UPDATE `Posts` SET `PostViews` = `PostViews` + 1 WHERE `Posts`.`PostID` = :postId";
@@ -251,6 +270,35 @@ function delete_post($PostId){
         $statement->bindValue(":postId", $PostId);
         $statement->execute();
         $statement->closeCursor();
+        return true;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to delete post from db<br/>";
+            
+    }
+}
+function make_comment($username, $comment){
+    global $db;
+    $query = "SELECT userID FROM Users WHERE Username=:username";
+    $query2 = "INSERT INTO `Comments` (`UserID`,`CommentTextContent`) VALUES (:id, :comment)";
+    try{
+        ## get userID
+        $statement = $db->prepare($query);
+        $statement->bindValue(":username", $username);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        $userID = $result[0];
+
+        ##insert into comments
+        $statement2 = $db->prepare($query);
+        $statement2->bindValue(":id", $userID);
+        $statement2->bindValue(":postId", $comment);
+        $statement2->execute();
+        $statement2->closeCursor();
+
         return true;
     }
     catch(PDOException $e){
