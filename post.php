@@ -15,7 +15,7 @@ if (isset($_COOKIE['user']))
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "Post"){
-        echo make_comment($_COOKIE['user'],$_POST['comment']);
+        make_comment($_COOKIE['user'],$_POST['comment']);
     }
 }
 
