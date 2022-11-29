@@ -92,6 +92,11 @@ function create_blog($blogTitle, $blogDescription, $username){
 function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID){
     global $db;
     $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES (:blogid, :title , 0, :content , NULL);";
+    ## Added for inserting into makesBlog
+    $query2 = "SELECT PostID FROM Posts WHERE PostTitle=:title AND PostTextContent=:content";
+    $query3 = "SELECT userID FROM Users WHERE Username=:username";
+    $query4 = "INSERT INTO makesPost (PostID, UserID) VALUES (:PostID, :UserID)";
+
     try{
     $statement = $db->prepare($query);
     $statement->bindValue(":title",$PostTitle);
@@ -99,8 +104,33 @@ function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID){
     $statement->bindValue(":blogid",$BlogID);
     $statement->execute();
     $statement->closeCursor();
-    return true;
 
+    ## Added this for inserting to makesPost table:
+    ## Getting the PostID of the post we just created
+    $statement2 = $db->prepare($query2);
+    $statement2->bindValue(":title",$PostTitle);
+    $statement2->bindValue(":content",$PostTextContent);
+    $statement2->execute();
+    $result2 = $statement2->fetch();
+    $PostID = $result2[0];
+    $statement2->closeCursor();
+   
+    ## getting the ID of the user
+    $statement3 = $db->prepare($query3);
+    $statement3->bindValue(":username", $username);
+    $statement3->execute();
+    $result3 = $statement3->fetch();
+    $userID = $result3[0];
+    $statement3->closeCursor();
+   
+    ## Inserting that ID and the PostID into makesPost
+    $statement4 = $db->prepare($query4);
+    $statement4->bindValue(":PostID",$PostID);
+    $statement4->bindValue(":UserID",$userID);
+    $statement4->execute();
+    $statement4->closeCursor();
+
+    return true;
     }
     catch(PDOException $e){
         return $e->getMessage();
