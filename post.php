@@ -30,10 +30,12 @@ if (isset($_COOKIE['user']))
 $post = get_single_post($_GET['PostId']);
 
 $picture = get_post_picture($_GET['PostId']);
-$picture = $picture[0];
+//$picture = $picture[0];
 
 ## I added this line
 $comment_list = get_comments($_GET['PostId']);
+
+// <?php echo '<img src="data:image/jpeg;base64,'.base64_encode($picture['image']).'"/>'; 
 
 
 ?>  
@@ -55,9 +57,10 @@ $comment_list = get_comments($_GET['PostId']);
   
   <div class="container">
   <h1><?php echo $post[2] ?></h1>
+  <?php echo '<div class="caption"><h3><img src="data:image/jpeg;base64,'.base64_encode($picture).'"/>'; ?>
   <?php echo $post[5] ?>
 
-  <img src="./image/<?php echo $picture['Picture']; ?>">
+  
   <br>
   Likes: <?php echo $post[4] ?>
   <br>

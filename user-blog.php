@@ -18,10 +18,12 @@ if (isset($_COOKIE['user']))
 {
     $PostTitle = trim($_POST['PostTitle']);
     $PostTextContent = trim($_POST['PostTextContent']);
-    $Picture = trim($_FILES["Picture"]["name"]);
-    $tempname = $_FILES["Picture"]["tmp_name"];
-    $folder = "./image/" . $Picture;
-    move_uploaded_file($tempname, $folder);
+    
+    $Picture = file_get_contents($_FILES['Picture']['tmp_name']);
+    //$Picture = trim($_FILES["Picture"]["name"]);
+    //$tempname = $_FILES["Picture"]["tmp_name"];
+    //$folder = "./image/" . $Picture;
+    //move_uploaded_file($tempname, $folder);
     create_blog_post($PostTitle, $PostTextContent, $_COOKIE['user'], $_GET['BlogID'], $Picture);
     // header('Location: home.php');
 }
@@ -50,7 +52,7 @@ $post_list = get_posts($_GET['BlogID']);
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
       Title: <input type="text" name="PostTitle" class="form-control" autofocus required /> <br/>
       Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
-      Image: <input type="file" name="Picture" required> <br/>
+      Image: <input type="file" name="Picture"> <br/>
       <input type="submit" value="Create!" class="btn btn-light"  />   
     </form>
   </div>
