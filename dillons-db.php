@@ -225,6 +225,25 @@ function get_posts($BlogID){
     }
 }
 
+function get_comments($PostID){
+    global $db;
+    $query = "SELECT * FROM `makesComments` NATURAL JOIN `Comments` WHERE PostID = :pid;";
+    try{
+        $statement = $db->prepare($query);
+        $statement->bindValue(":pid", $PostID);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+        if($statement->rowCount() == 0)
+            echo "Failed to get comment from database <br/>";
+            
+    }
+}
+
 function get_single_post($PostID){
     global $db;
     $query = "SELECT * FROM `Posts` WHERE PostID = :pid";
@@ -279,10 +298,13 @@ function delete_post($PostId){
             
     }
 }
-function make_comment($username, $comment){
+function make_comment($username, $comment, $PostID){
     global $db;
     $query = "SELECT userID FROM Users WHERE Username=:username";
     $query2 = "INSERT INTO `Comments` (`UserID`,`CommentTextContent`) VALUES (:id, :comment)";
+    # My code:
+    $query3 = "SELECT CommentID FROM Comments WHERE CommentTextContent=:comment";
+    $query4 = "INSERT INTO `makesComments` (`PostID`, `CommentID`) VALUES (:pid, :cid)";
     try{
         ## get userID
         $statement = $db->prepare($query);
@@ -298,6 +320,22 @@ function make_comment($username, $comment){
         $statement2->bindValue(":comment", $comment);
         $statement2->execute();
         $statement2->closeCursor();
+
+        ## My code
+        ## Select comment id
+        $statement3 = $db->prepare($query3);
+        $statement3->bindValue(":comment",$comment);
+        $statement3->execute();
+        $result3 = $statement3->fetch();
+        $statement3->closeCursor();
+        $CommentID = $result3[0];
+
+        ## Insert post id
+        $statement4 = $db->prepare($query4);
+        $statement4->bindValue(":pid", $PostID);
+        $statement4->bindValue(":cid", $CommentID);
+        $statement4->execute();
+        $statement4->closeCursor();
 
         return true;
     }
