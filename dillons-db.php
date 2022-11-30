@@ -98,19 +98,36 @@ function create_blog($blogTitle, $blogDescription, $username){
     }
 }
 
-function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID){
+function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID, $Picture){
     global $db;
-    $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES (:blogid, :title , 0, :content , NULL);";
+    $query0 = "INSERT INTO `PostPicture` VALUES (DEFAULT, :Picture)";
+    $query00 = "SELECT PostPictureID FROM PostPicture WHERE Picture=:picture"; 
+    $query = "INSERT INTO `Posts` (`BlogID`, `PostTitle`, `PostViews`, `PostTextContent`, `PostPictureID`) VALUES (:blogid, :title , 0, :content, :postpictureID);";
     ## Added for inserting into makesBlog
     $query2 = "SELECT PostID FROM Posts WHERE PostTitle=:title AND PostTextContent=:content";
     $query3 = "SELECT userID FROM Users WHERE Username=:username";
     $query4 = "INSERT INTO makesPost (PostID, UserID) VALUES (:PostID, :UserID)";
+    
 
     try{
+    $statement0 = $db->prepare($query0);
+    $statement0->bindValue(":Picture",$Picture);
+    $statement0->execute();
+    $statement0->closeCursor();
+    
+    $statement00 = $db->prepare($query00);
+    $statement00->bindValue(":picture",$Picture);
+    $statement00->execute();
+    $result00 = $statement00->fetch();
+    $PostPictureID = $result00[0];
+    $statement00->closeCursor();
+
+
     $statement = $db->prepare($query);
     $statement->bindValue(":title",$PostTitle);
     $statement->bindValue(":content",$PostTextContent);
     $statement->bindValue(":blogid",$BlogID);
+    $statement->bindValue(":postpictureID",$PostPictureID);
     $statement->execute();
     $statement->closeCursor();
 
@@ -138,7 +155,6 @@ function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID){
     $statement4->bindValue(":UserID",$userID);
     $statement4->execute();
     $statement4->closeCursor();
-
     return true;
     }
     catch(PDOException $e){
@@ -147,6 +163,17 @@ function create_blog_post($PostTitle, $PostTextContent, $username, $BlogID){
             return "Failed to add post to database <br/>";
         
     }
+}
+
+function get_post_picture($PostID){
+    global $db;
+    $query = "SELECT Picture FROM PostPicture NATURAL JOIN Posts WHERE PostID = :PostID";
+    $statement = $db->prepare($query);
+    $statement->bindValue(":PostID",$PostID);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $statement->closeCursor();
+    return $result;
 }
 
 

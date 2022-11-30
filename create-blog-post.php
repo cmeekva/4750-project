@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['PostTitle']) > 0 && s
     <h1>Create A New Post</h1>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       Title: <input type="text" name="PostTitle" class="form-control" autofocus required /> <br/>
-      Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
+      Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>      
       <input type="submit" value="Create!" class="btn btn-light"  />   
     </form>
   </div>
