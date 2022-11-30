@@ -15,7 +15,7 @@ if (isset($_COOKIE['user']))
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "Post"){
-        make_comment($_COOKIE['user'],$_POST['comment']);
+        make_comment($_COOKIE['user'],$_POST['comment'], $_GET['PostId']);
     }
 }
 
@@ -28,8 +28,13 @@ if (isset($_COOKIE['user']))
 // }
 
 $post = get_single_post($_GET['PostId']);
+
 $picture = get_post_picture($_GET['PostId']);
 $picture = $picture[0];
+
+## I added this line
+$comment_list = get_comments($_GET['PostId']);
+
 
 ?>  
 <html>
@@ -61,6 +66,24 @@ $picture = $picture[0];
     <input type="submit" value="Post" name="btnAction" class="btn btn-dark" />
 </form> 
   </div>
+
+
+<div class="container">
+
+<table class="w3-table w3-bordered w3-card-4 center" style="width:90%">
+<thead>
+    <tr style="background-color:#B0B0B0">
+        <th width="40%">Comments</th>        
+    </tr>
+  </thead>
+  <?php foreach ($comment_list as $var): ?>
+       <tr>
+       <td><?php echo $var['CommentTextContent']; ?></td>                             
+      </tr>
+      <?php endforeach; ?>
+  </table>
+  </div>
+
 <?php 
 }
 else 
