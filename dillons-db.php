@@ -171,9 +171,9 @@ function get_post_picture($PostID){
     $statement = $db->prepare($query);
     $statement->bindValue(":PostID",$PostID);
     $statement->execute();
-    $result = $statement->fetchAll();
-    $statement->closeCursor();
-    return $result;
+    $result = $statement->fetch();
+    
+    return $result[0];
 }
 
 
