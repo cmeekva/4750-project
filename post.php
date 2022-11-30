@@ -15,7 +15,7 @@ if (isset($_COOKIE['user']))
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(!empty($_POST['btnAction']) && $_POST['btnAction'] == "Post"){
-        make_comment($_COOKIE['user'],$_POST['comment']);
+        make_comment($_COOKIE['user'],$_POST['comment'], $_GET['PostId']);
     }
 }
 
@@ -28,6 +28,9 @@ if (isset($_COOKIE['user']))
 // }
 
 $post = get_single_post($_GET['PostId']);
+## I added this line
+$comment_list = get_comments($_GET['PostId']);
+
 
 ?>  
 <html>
@@ -57,6 +60,20 @@ $post = get_single_post($_GET['PostId']);
     <input type="submit" value="Post" name="btnAction" class="btn btn-dark" />
 </form> 
   </div>
+  // Inserted here
+  <?php foreach ($post_list as $var): ?>
+       
+       <tr>
+       
+       <td><a href="post.php?PostId=<?php echo $var['PostID']?>"><?php echo $var['PostTitle']; ?></a></td>
+       <td><?php echo $var['PostTextContent']; ?></td> 
+       <td><form action="blog.php?BlogID=<?php echo $_GET['BlogID'] ?>&BlogTitle=<?php echo $_GET['BlogTitle'] ?>" method="post">
+          <input type="submit" name="Like" value="Like" class="btn btn-dark" />
+          <input type="hidden" name="postId" value="<?php echo $var['PostID']?>" />
+        </form></td>                                     
+      </tr>
+      <?php endforeach; ?>
+
 <?php 
 }
 else 
