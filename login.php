@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && strlen($_POST['username']) > 0)
 <body>
   
   <div class="container">
-    <h1>Login to the Fortnite Blog</h1>
+    <h1>Login to the UVA Blog</h1>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
       Username: <input type="text" name="username" class="form-control" autofocus required /> <br/>
       Password: <input type="password" name="pwd" class="form-control" required /> <br/>

@@ -37,7 +37,7 @@ $post_list = get_posts($_GET['BlogID']);
     </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
+          <a href="home.php" class="navbar-brand">UVA Blog Website</a>
           </div>
           <div style="float:right">    
       <form action="logout.php" method="get">
@@ -65,7 +65,7 @@ $post_list = get_posts($_GET['BlogID']);
         <th width="30%">Post Title</th>        
         <th width="30%">Caption</th>
         <th width="30%">Time Posted</th>
-        <th width="30%">Likes</th> 
+        <th width="30%">Upvotes</th> 
         <th width="30%">Delete</th>   
 
     </tr>
@@ -95,8 +95,7 @@ else
  <footer class="text-center text-lg-start bg-light text-muted">
 
 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-  © 2022 Copyright:
-  <a class="text-reset fw-bold" href="https://www.linkedin.com/in/colin-meek">Colin Meek (cmm6zyd)</a>
+© 2022 Copyright: Colin Meek, Dillon Nelson, Brendan Bennet, and Liam Tracey
 </div>
 
 </footer>

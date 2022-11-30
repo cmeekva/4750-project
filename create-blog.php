@@ -45,8 +45,7 @@ else
 <footer class="text-center text-lg-start bg-light text-muted">
 
 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-  © 2022 Copyright:
-  <a class="text-reset fw-bold" href="https://www.linkedin.com/in/colin-meek">Colin Meek (cmm6zyd)</a>
+© 2022 Copyright: Colin Meek, Dillon Nelson, Brendan Bennet, and Liam Tracey
 </div>
 </footer>
 

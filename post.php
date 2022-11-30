@@ -45,7 +45,7 @@ $comment_list = get_comments($_GET['PostId']);
     </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
+          <a href="home.php" class="navbar-brand">UVA Blog Website</a>
           </div>
           <div style="float:right">    
       <form action="logout.php" method="get">
@@ -62,7 +62,7 @@ $comment_list = get_comments($_GET['PostId']);
 
   
   <br>
-  Likes: <?php echo $post[4] ?>
+    Upvotes: <?php echo $post[4] ?>
   <br>
   <form name="mainForm" action="post.php?PostId=<?php echo $post[0] ?>" method="post"> 
   <input type = "text" name="comment" placeholder="Type your comment here!" class="col-sm-11">
@@ -97,8 +97,7 @@ else
  <footer class="text-center text-lg-start bg-light text-muted">
 
 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-  © 2022 Copyright:
-  <a class="text-reset fw-bold" href="https://www.linkedin.com/in/colin-meek">Colin Meek (cmm6zyd)</a>
+© 2022 Copyright: Colin Meek, Dillon Nelson, Brendan Bennet, and Liam Tracey
 </div>
 
 </footer>

@@ -16,7 +16,7 @@ $blog_list = get_blogs();
     </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a href="home.php" class="navbar-brand">Fortnite Blog Website</a>
+          <a href="home.php" class="navbar-brand">UVA Blog Website</a>
           </div>
 
         <div class="float:center">
@@ -58,8 +58,7 @@ else
  <footer class="text-center text-lg-start bg-light text-muted">
 
 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-  © 2022 Copyright:
-  <a class="text-reset fw-bold" href="https://www.linkedin.com/in/colin-meek">Colin Meek (cmm6zyd)</a>
+© 2022 Copyright: Colin Meek, Dillon Nelson, Brendan Bennet, and Liam Tracey
 </div>
 
 </footer>

@@ -186,7 +186,12 @@ function login($username, $password){
         $statement->execute();
         $result = $statement->fetch();
         $statement->closeCursor();
-        return password_verify($password, $result[0]);
+        if (!empty($result)){
+            return password_verify($password, $result[0]);
+        }else{
+            return false;
+        }
+        
     }
     catch(PDOException $e){
         echo $e->getMessage();
