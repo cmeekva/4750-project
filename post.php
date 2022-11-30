@@ -60,19 +60,26 @@ $comment_list = get_comments($_GET['PostId']);
     <input type="submit" value="Post" name="btnAction" class="btn btn-dark" />
 </form> 
   </div>
-  // Inserted here
-  <?php foreach ($post_list as $var): ?>
-       
+
+
+<div class="container">
+
+<table class="w3-table w3-bordered w3-card-4 center" style="width:90%">
+<thead>
+    <tr style="background-color:#B0B0B0">
+        <th width="40%">Comments</th>        
+    </tr>
+  </thead>
+  <?php foreach ($comment_list as $var): ?>
        <tr>
-       
-       <td><a href="post.php?PostId=<?php echo $var['PostID']?>"><?php echo $var['PostTitle']; ?></a></td>
-       <td><?php echo $var['PostTextContent']; ?></td> 
-       <td><form action="blog.php?BlogID=<?php echo $_GET['BlogID'] ?>&BlogTitle=<?php echo $_GET['BlogTitle'] ?>" method="post">
-          <input type="submit" name="Like" value="Like" class="btn btn-dark" />
+       <td><?php echo $var['CommentTextContent']; ?></td> 
+       <td><form action="post.php?PostID=<?php echo $_GET['PostID'] ?>&PostTitle=<?php echo $_GET['PostTitle'] ?>" method="post">
           <input type="hidden" name="postId" value="<?php echo $var['PostID']?>" />
         </form></td>                                     
       </tr>
       <?php endforeach; ?>
+  </table>
+  </div>
 
 <?php 
 }

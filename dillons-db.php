@@ -227,10 +227,10 @@ function get_posts($BlogID){
 
 function get_comments($PostID){
     global $db;
-    $query = "SELECT * FROM `makesComments` NATURAL JOIN `Comments` WHERE PostID = 1;";
+    $query = "SELECT * FROM `makesComments` NATURAL JOIN `Comments` WHERE PostID = :pid;";
     try{
         $statement = $db->prepare($query);
-        $statement->bindValue(":pid", $CommentID);
+        $statement->bindValue(":pid", $PostID);
         $statement->execute();
         $result = $statement->fetchAll();
         $statement->closeCursor();
