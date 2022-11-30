@@ -52,7 +52,7 @@ $post_list = get_posts($_GET['BlogID']);
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
       Title: <input type="text" name="PostTitle" class="form-control" autofocus required /> <br/>
       Post Body: <input type="test" name="PostTextContent" class="form-control" required /> <br/>
-      Image: <input type="file" name="Picture"> <br/>
+      Image: <input type="file" name="Picture" required> <br/>
       <input type="submit" value="Create!" class="btn btn-light"  />   
     </form>
   </div>
