@@ -72,10 +72,7 @@ $comment_list = get_comments($_GET['PostId']);
   </thead>
   <?php foreach ($comment_list as $var): ?>
        <tr>
-       <td><?php echo $var['CommentTextContent']; ?></td> 
-       <td><form action="post.php?PostID=<?php echo $_GET['PostID'] ?>&PostTitle=<?php echo $_GET['PostTitle'] ?>" method="post">
-          <input type="hidden" name="postId" value="<?php echo $var['PostID']?>" />
-        </form></td>                                     
+       <td><?php echo $var['CommentTextContent']; ?></td>                             
       </tr>
       <?php endforeach; ?>
   </table>
